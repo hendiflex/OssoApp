@@ -18,27 +18,27 @@ export default class Dashboard extends React.Component {
       <View style={styles.container}>
 
         <View style={styles.header}>
-          <Text style={styles.headerText}>Welcome, <Text style={styles.userText}>handsome</Text></Text>
+          <Text style={styles.headerText}>Faka <Text style={styles.userText}>Boi</Text></Text>
 
-          <Text style={styles.promptText}>What can I do for you today?</Text>
+          <Text style={styles.promptText}>Wat kan ik voor je doen vandaag?</Text>
         </View>
 
         <View style={styles.bodyWrapper}>
           <View style={styles.card}>
-            <Icon style={styles.cardIcon} name="home" size={30} />
-            <Text style={styles.cardText}>Leuke shit</Text>
+            <Icon style={styles.cardIcon} name="euro-sign" size={45} />
+            <Text style={styles.cardText}>De dagelijkse kost</Text>
           </View>
           <View style={styles.card}>
-            <Icon style={styles.cardIcon} name="home" size={30} />
-            <Text style={styles.cardText}>Gekkere shit</Text>
+            <Icon style={styles.cardIcon} name="shopping-cart" size={45} />
+            <Text style={styles.cardText}>Boodschappen</Text>
           </View>
           <View style={styles.card}>
-            <Icon style={styles.cardIcon} name="home" size={30} />
-            <Text style={styles.cardText}>Andere shit</Text>
+            <Icon style={styles.cardIcon} name="check" size={45} />
+            <Text style={styles.cardText}>Osso To-Do's</Text>
           </View>
           <View style={styles.card}>
-            <Icon style={styles.cardIcon} name="home" size={30} />
-            <Text style={styles.cardText}>Dank shit</Text>
+            <Icon style={styles.cardIcon} name="utensils" size={45} />
+            <Text style={styles.cardText}>Avondeten generator</Text>
           </View>
         </View>
       </View>
