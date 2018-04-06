@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import images from '../util/images';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Testscreen extends React.Component {
 
   static navigationOptions = {
-    title: 'Random scherm',
+    tabBarLabel: 'Settings',
+    tabBarIcon: ({ tintColor }) => <Icon name="cog" size={30} />,
   };
 
   sayHello() {
