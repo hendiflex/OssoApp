@@ -15,6 +15,9 @@ const AppNavigator = StackNavigator({
   Testscreen: {
     screen: Testscreen,
   },
+  Hendispeeltuin: {
+    screen: Hendispeeltuin,
+  },
 }, {
   initialRouteName: 'Dashboard',
   mode: Platform.OS === 'ios' ? 'modal' : 'card',
