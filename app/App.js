@@ -1,10 +1,11 @@
 import React from 'react';
 import AppNavigator from './config/router';
 import * as firebase from "firebase";
+import config from './config/config.js';
 
 /* Set up Firebase */
 firebase.initializeApp({
-  apiKey: "AIzaSyAegdk5PqDHtRNLAcqOxQSOktuHJcV1jrY",
+  apiKey: config.apiKey,
   authDomain: "ossoapp.firebaseapp.com",
   databaseURL: "https://ossoapp.firebaseio.com",
   projectId: "ossoapp",
