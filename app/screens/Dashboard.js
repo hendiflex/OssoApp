@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import * as api from '../util/api.js';
+
 export default class Dashboard extends React.Component {
 
   static navigationOptions = {
@@ -10,6 +12,9 @@ export default class Dashboard extends React.Component {
   };
 
 
+  test() {
+    console.log('yeah boi');
+  }
 
   render() {
 
@@ -23,9 +28,16 @@ export default class Dashboard extends React.Component {
           <Text style={styles.promptText}>Wat kan ik voor je doen vandaag?</Text>
         </View>
 
+        <Button
+          onPress={() => api.register('test@test.com', 'testtest')}
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+
         <View style={styles.bodyWrapper}>
           <View style={styles.card}>
-            <Icon style={styles.cardIcon} name="euro-sign" size={45} />
+            <Icon style={styles.cardIcon} name="euro" size={45} />
             <Text style={styles.cardText}>De dagelijkse kost</Text>
           </View>
           <View style={styles.card}>
@@ -37,7 +49,7 @@ export default class Dashboard extends React.Component {
             <Text style={styles.cardText}>Osso To-Do's</Text>
           </View>
           <View style={styles.card}>
-            <Icon style={styles.cardIcon} name="utensils" size={45} />
+            <Icon style={styles.cardIcon} name="cutlery" size={45} />
             <Text style={styles.cardText}>Avondeten generator</Text>
           </View>
         </View>
@@ -102,5 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'monospace',
     padding: 10,
+    textAlign: 'center',
   },
 });
