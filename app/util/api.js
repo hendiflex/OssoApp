@@ -5,29 +5,31 @@ const register = async (email, pass) => {
     try {
         await firebase.auth()
             .createUserWithEmailAndPassword(email, pass);
-
-        console.log("Account created");
-
-        // Navigate to the Home page, the user is auto logged in
-
     } catch (error) {
-        console.log(error.toString())
+        console.log(error.toString());
+        throw error.message;
     }
 };
 
 const login = async (email, pass) => {
     try {
-        // await firebase.auth()
-        //     .signInWithEmailAndPassword(email, pass);
-
-        console.log("Logged In!");
-
-        // Navigate to the Home page
-
+        await firebase.auth()
+            .signInWithEmailAndPassword(email, pass);
     } catch (error) {
+        console.log('ahkenrhkanreh')
         console.log(error.toString())
+        throw error.message;
     }
 };
 
+const logout = async () => {
+    try {
+        await firebase.auth().signOut();
+    } catch (error) {
+        console.log(error.toString());
+        throw error.message;
+    }
+}
 
-export { register, login };
+
+export { register, login, logout };

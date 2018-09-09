@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import * as firebase from "firebase";
 import * as api from '../util/api.js';
 
 export default class Dashboard extends React.Component {
@@ -11,26 +11,31 @@ export default class Dashboard extends React.Component {
     tabBarIcon: ({ tintColor }) => <Icon name="home" size={30} />,
   };
 
+  state = {
+    currentUser: null
+  }
 
-  test() {
-    console.log('yeah boi');
+  componentDidMount() {
+    const { currentUser } = firebase.auth();
+    this.setState({ currentUser });
   }
 
   render() {
 
+    const { currentUser } = this.state;
 
     return (
       <View style={styles.container}>
 
         <View style={styles.header}>
-          <Text style={styles.headerText}>Faka <Text style={styles.userText}>Boi</Text></Text>
+          <Text style={styles.headerText}>Faka <Text style={styles.userText}>{currentUser && currentUser.email}</Text></Text>
 
           <Text style={styles.promptText}>Wat kan ik voor je doen vandaag?</Text>
         </View>
 
         <Button
-          onPress={() => api.register('test@test.com', 'testtest')}
-          title="Learn More"
+          onPress={() => api.logout().then(() => this.props.navigation.navigate('Loading'))}
+          title="Logout"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />

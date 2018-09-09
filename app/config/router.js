@@ -1,11 +1,13 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator, SwitchNavigator } from 'react-navigation';
 
 /* Screen imports */
 import Dashboard from '../screens/Dashboard.js';
 import Testscreen from '../screens/Testscreen.js';
-
+import Loading from '../screens/Loading.js';
+import SignUp from '../screens/SignUp.js';
+import Login from '../screens/Login.js';
 
 const Tabs = TabNavigator({
   Dashboard: {
@@ -35,15 +37,18 @@ const Tabs = TabNavigator({
   }
 });
 
-/* The root stack of the app */
-const AppNavigator = StackNavigator({
-  Index: {
-    screen: Tabs,
+const AppNavigator = SwitchNavigator(
+  {
+    Loading,
+    Login,
+    SignUp,
+    Tabs
   },
-}, {
-  initialRouteName: 'Index',
-  mode: Platform.OS === 'ios' ? 'modal' : 'card',
-  headerMode: 'none',
-});
+  {
+    initialRouteName: 'Loading',
+    mode: Platform.OS === 'ios' ? 'modal' : 'card',
+    headerMode: 'none',
+  }
+)
 
 export default AppNavigator;
