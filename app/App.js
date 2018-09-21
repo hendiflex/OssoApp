@@ -4,6 +4,14 @@ import * as firebase from "firebase";
 import config from './config/config.js';
 
 /* Set up Firebase */
+const originalSend = XMLHttpRequest.prototype.send;
+XMLHttpRequest.prototype.send = function(body) {
+  if (body === '') {
+    originalSend.call(this);
+  } else {
+    originalSend.call(this, body);
+  }
+};
 firebase.initializeApp({
   apiKey: config.apiKey,
   authDomain: "ossoapp.firebaseapp.com",

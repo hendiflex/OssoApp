@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as firebase from "firebase";
+import 'firebase/firestore';
 import * as api from '../util/api.js';
+import moment from 'moment';
 
 export default class Dashboard extends React.Component {
 
@@ -12,12 +14,54 @@ export default class Dashboard extends React.Component {
   };
 
   state = {
-    currentUser: null
+    currentUser: null,
+    db: null,
+    dailyData: []
   }
 
   componentDidMount() {
     const { currentUser } = firebase.auth();
-    this.setState({ currentUser });
+    const db = firebase.firestore();
+    this.setState({ currentUser, db });
+
+    let dailyData = this.getDailyData(db);
+  }
+
+  getDailyData(db) {
+
+
+    let dailyData = [];
+
+    db.collection("dailydata")
+      .where("created_at", "==", moment().format("MMM Do YY"))
+      .get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          console.log(doc.id, " => ", doc.data().user);
+          console.log(doc.data());
+          dailyData.push(doc.data());
+        });
+        return dailyData;
+      }).catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+  }
+
+  addTodo() {
+
+    const { db } = this.state;
+
+    db.collection("dailydata").add({
+      boodschappen: true,
+      eet_thuis: true,
+      koken: false,
+      user: 'max',
+      created_at: moment().format("MMM Do YY")
+    }).then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+    }).catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
+
   }
 
   render() {
@@ -33,11 +77,12 @@ export default class Dashboard extends React.Component {
           <Text style={styles.promptText}>Wat kan ik voor je doen vandaag?</Text>
         </View>
 
+
+
         <Button
-          onPress={() => api.logout().then(() => this.props.navigation.navigate('Loading'))}
-          title="Logout"
+          onPress={() => console.log('wut')}
+          title="Test"
           color="#841584"
-          accessibilityLabel="Learn more about this purple button"
         />
 
         <View style={styles.bodyWrapper}>
