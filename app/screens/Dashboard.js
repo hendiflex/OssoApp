@@ -19,28 +19,32 @@ export default class Dashboard extends React.Component {
     dailyData: []
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
-    this.setState({ currentUser, db });
-
-    let dailyData = this.getDailyData(db);
+    this.setState({ currentUser, db });    
+  }
+  
+  componentDidMount() {
+    this.getDailyData();
   }
 
-  getDailyData(db) {
-
-
+  getDailyData() {
+    
+    const db = firebase.firestore();
+    
     let dailyData = [];
 
     db.collection("dailydata")
       .where("created_at", "==", moment().format("MMM Do YY"))
-      .get().then(function(querySnapshot) {
+      .get().then((querySnapshot) => {
         querySnapshot.forEach(function(doc) {
           console.log(doc.id, " => ", doc.data().user);
           console.log(doc.data());
           dailyData.push(doc.data());
         });
-        return dailyData;
+        console.log('HALOOO', dailyData)
+        this.setState({ dailyData })
       }).catch(function(error) {
           console.log("Error getting documents: ", error);
       });
@@ -80,7 +84,7 @@ export default class Dashboard extends React.Component {
 
 
         <Button
-          onPress={() => console.log('wut')}
+          onPress={() => console.log(this.state.dailyData)}
           title="Test"
           color="#841584"
         />
